@@ -1,0 +1,23 @@
+UIMaster:
+
+switch:
+    Main,panel
+    BG/FG
+    with show hide animation (async)
+
+auto select one child->call after re-render?
+
+UDLR logic..change selecter
+
+
+
+
+
+demo:
+start(list)
+hints
+BG
+
+setting(panel+tab+list+selector/checkbox)
+main(grid + bg shortcut)
+player select

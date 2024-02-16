@@ -1,0 +1,65 @@
+{
+	"name": "domgameui",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./dist/domgameui.cjs.js",
+	"module": "./dist/domgameui.esm.js",
+	"bundle": "./dist/domgameui.js",
+	"types": "./dist/domgameui.d.ts",
+	"namespace": "domgameui",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/domgameui.d.ts",
+				"default": "./dist/domgameui.esm.js"
+			},
+			"require": {
+				"types": "./dist/domgameui.d.ts",
+				"default": "./dist/domgameui.cjs.js"
+			}
+		}
+	},
+	"scripts": {
+		"watch": "cross-env NODE_ENV=DEV rollup -c --watch",
+		"build": "cross-env NODE_ENV=production rollup -c"
+	},
+	"keywords": [
+		"controller",
+		"gamepad",
+		"keyboard",
+		"multiplayer",
+		"dom",
+		"ui"
+	],
+	"author": "hocti",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Hocti/domgameui/"
+	},
+	"files": [
+		"./dist/",
+		"LICENSE",
+		"package.json",
+		"README.md"
+	],
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^25.0.7",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"concurrently": "^8.2.2",
+		"cross-env": "^7.0.3",
+		"esbuild": "^0.19.9",
+		"lit": "^3.1.1",
+		"rollup": "^4.9.0",
+		"rollup-plugin-dts": "^6.1.0",
+		"rollup-plugin-esbuild": "^6.1.0",
+		"typescript": "^5.3.3"
+	},
+	"peerDependencies": {
+		"controlwrap": "^1.0.0"
+	},
+	"dependencies": {
+		"eventemitter3": "^5.0.1",
+		"lit": "^3.1.1"
+	}
+}
