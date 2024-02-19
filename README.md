@@ -1,4 +1,4 @@
-# DOM Game UI with ControlWrap
+# DOM Game UI (with ControlWrap)
 
 `domgameui` is a lightweight, powerful UI framework built on top of `lit`](https://lit.dev/) for creating game user interfaces using standard DOM elements. Designed with game development in mind, it allows for intuitive navigation and interaction using gamepads and keyboards, without the need for a mouse or touch input(It's optional). This framework makes it easy to implement a cursor system, select items, and interact with a variety of UI components such as lists, grids, tab panels, buttons, selectors, checkboxes, range sliders, and radio button groups. Additionally, `dom game ui` offers robust support for multiplayer controls, enabling multiple players to interact with the UI simultaneously.
 
