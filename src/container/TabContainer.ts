@@ -2,7 +2,7 @@ import {css, PropertyValueMap, html,CSSResultGroup} from 'lit';
 import {query, property} from 'lit/decorators.js';
 import Container from './Container';
 import {HoriContainer} from './ListContainer';
-import Button from '../component/Button';
+import {Button} from '../component/Button';
 import {Input,UIButton,UIButtonOptional,LR,L1R1} from 'controlwrap'
 import { s } from '../utils';
 
@@ -23,10 +23,16 @@ Button.prepare();
 HoriContainer.prepare();
 
 export default class TabContainer extends Container{
-    
-    static readonly eleName:string="base-tab-container";
+
+    static eleName:string='domui-tab-container';
 
     static styles:CSSResultGroup = [...(super.styles?[super.styles]:[]),css`
+    .tab_LR{
+        cursor: pointer;
+    }
+    .tabBtn{
+        cursor: pointer;
+    }
     .tabBtnsContainer{
         display: flex;
         justify-content: space-between;
@@ -35,16 +41,17 @@ export default class TabContainer extends Container{
     .tabBtns{
         display: flex;
         justify-content: center;
-    }
+    }`]
+
+
+    static tempCss=css`
     .tabBtn{
         padding: 0.5rem 1rem;
-        cursor: pointer;
         &.active{
             border: 1px solid red;
         }
     }
     .tab_LR{
-        cursor: pointer;
         &:hover{
             border: 1px solid yellow;
         }
@@ -55,7 +62,7 @@ export default class TabContainer extends Container{
     .tab_LR[name="tab_next"]:before {
         content: "➡️"
     }
-    `];
+    `;
 
     readonly loop:boolean=true;
     readonly showLR:boolean=true;
@@ -84,7 +91,6 @@ export default class TabContainer extends Container{
         super.updated(_changedProperties);
         if(_changedProperties.has('currentTabIndex') || _changedProperties.has('slotElements')){
             setTimeout(()=>{
-                //console.log('updated tab',this.uiChildren.length,lastCursor,this.cursorChild)
                 if(lastCursor!=this.cursorChild){
                     if(this.uiChildren.length>1){
                         this.setCursor(this.uiChildren[1],true);
@@ -94,10 +100,6 @@ export default class TabContainer extends Container{
                     //this.autoFindCursor(false,true);
                 }
             })
-            /*
-            */
-            //this.autoFindCursor(false,true);
-            //console.log('tab_updated',this.currentTabIndex,this)
         }
     }
     
@@ -117,6 +119,7 @@ export default class TabContainer extends Container{
     }
 
     renderTabBtns(){
+        console.log('renderTabBtns')
         return html`
         <div class="tabBtnsContainer">
             ${this.showLR?html`<a @click=${this.prevTab} name="tab_prev" class="tab_LR"></a>`:html``}

@@ -11,8 +11,10 @@ import BaseComponent from './BaseComponent';
 import {Input,LR,UDLRpressing} from 'controlwrap'
 import {clamp} from '../utils'
 
-export class RangeComponent extends BaseComponent{
+export class RangeSlider extends BaseComponent{
     
+
+    static eleName:string='domui-range';
 
     @property({type:Number})
     value:number=0;
@@ -29,12 +31,12 @@ export class RangeComponent extends BaseComponent{
     @property({type:Boolean})
     useFloat:boolean=false;
 
-    static styles = [css`
+    static tempCss=css`
         :host(.active) .rangeBox{
             .border: 3px solid red;
             box-shadow: yellow 2px 2px 25px;
         }
-    `]
+    `;
 
     renderCore():TemplateResult<1>{
         //console.log('renderCore',this.value)
@@ -108,4 +110,4 @@ export class RangeComponent extends BaseComponent{
     }
 
 }
-RangeComponent.prepare();
+RangeSlider.prepare();

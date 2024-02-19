@@ -2,10 +2,11 @@ import {Input,InputSource,InputGroup, ControlWrap} from 'controlwrap'
 //import {UI,UIRoot,UIType} from './ui'
 import {
     UI,UIParentRoot,UISelectable,UIPanel,UIParent,
-    isUIParent,UIChild, isUIChild} from './ui/UIInterface'
+    isUIParent,UIChild, isUIChild,
+    isContainer} from './ui/UIInterface'
 import {styled} from './extra/styled'
 import * as utils from './utils'
-import EventEmitter from 'eventemitter3';
+//import EventEmitter from 'eventemitter3';
 import {LitElement, html, css ,CSSResultGroup,render} from 'lit';
 import {customElement, property,state,query,queryAsync } from 'lit/decorators.js';
 import {Layer,fullScreenCSS} from './ui/Layer'
@@ -47,7 +48,7 @@ styled('root-screen',css`
 
 const layerNames=['bg','game','main','panel','fg'];
 
-export default class UIMaster extends EventEmitter {
+export default class UIMaster extends EventTarget{//} extends EventEmitter {
 
     //static================================================================
 
@@ -192,13 +193,14 @@ export default class UIMaster extends EventEmitter {
         }
         
         if(this.lastSize.w!=newWidth || this.lastSize.h!=newHeight){
-            this.emit('resize',{
+            //this.emit('resize',{
+            this.dispatchEvent(new CustomEvent('resize',{detail:{
                 oldWidth:this.lastSize.w,
                 oldHeight:this.lastSize.h,
                 newWidth,
                 newHeight,
                 fontSize:this._fontsize
-            });
+            }}));
             this.lastSize.w=newWidth;
             this.lastSize.h=newHeight;
         }
@@ -236,7 +238,22 @@ export default class UIMaster extends EventEmitter {
             }else{
                 if(this.activeUI && inputs.ui.ui_tap.length>0){
                     this.activeUI.findAndActiveFirstSelectable();
-                    //console.log()
+                }
+                if(this.activeChild){
+                    let captured=this.activeChild.captureInput(inputs.ui);
+                    let target:UIChild=this.activeChild;
+                    while(!captured){
+                        const parent=target.getParent();
+                        if(parent && isUIChild(parent)){
+                            target=parent as unknown as UIChild;
+                            captured=target.captureInput(inputs.ui);
+                        }else{
+                            break;
+                        }
+                    }
+                    if(captured){ 
+                        return; 
+                    }
                 }
             }
             if(this.activeUI){
@@ -422,6 +439,32 @@ export default class UIMaster extends EventEmitter {
         this.setActiveComponent(result);
     }
 
+    private setActiveChild() {
+        setTimeout(() => {
+           
+            if(!this.activeUI){
+                this.activeChild=undefined;
+                log.update('activeChild',this.activeChild);
+                return;
+            }
+            
+            if(!this.activeChild && this.activeUI.cursorChild && isUIParent(this.activeUI.cursorChild)){
+                let currChild:UIChild=this.activeUI.cursorChild;
+                while((currChild as unknown as UIParent).cursorChild && isUIParent((currChild as unknown as UIParent).cursorChild)){
+                    currChild=(currChild as unknown as UIParent).cursorChild!;
+                }
+                this.activeChild=currChild;
+                console.log('setActiveUI4',this.activeChild)
+                log.update('activeChild',this.activeChild);
+                return;
+            }
+
+            this.activeChild=undefined;
+            log.update('activeChild',this.activeChild);
+         
+        });
+    }
+
     public setActiveComponent(com?:UISelectable):boolean {//success
         if(this.activeComponent===com){
             return true;
@@ -433,6 +476,7 @@ export default class UIMaster extends EventEmitter {
         if(!com || com.isConnected===false){
             this.activeComponent=undefined;
             log.update('activeComponent',undefined);
+            this.setActiveChild();
             return true;
         }
         const comRoot=com.getRoot();
@@ -440,12 +484,14 @@ export default class UIMaster extends EventEmitter {
         if(!this.activeUI){
             this.activeUI=comRoot
         }else if(this.activeUI!=comRoot){
+            //this.setActiveChild();
             return false;
         }
         this.activeComponent=com;
         //this.setAllParentActive(this.activeComponent,true);
         log.update('activeComponent',com.tagName+','+com.innerHTML);
         //* get hints?
+        //this.setActiveChild();
         return true;
     }
 
@@ -471,7 +517,3 @@ export default class UIMaster extends EventEmitter {
 }
 
 export let MI=UIMaster.getInstance();
-/*
-TODO: 
-
-*/

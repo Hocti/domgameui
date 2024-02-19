@@ -1,7 +1,7 @@
 /*!
  * domgameui - v1.0.0
  * By hocti
- * Compiled Wed, 14 Feb 2024 19:38:56 UTC
+ * Compiled Mon, 19 Feb 2024 08:50:33 UTC
  *
  * domgameui is licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license
@@ -9,7 +9,6 @@
 import { Input, InputGroup, InputSource } from 'controlwrap';
 import * as lit from 'lit';
 import { LitElement, TemplateResult, CSSResultGroup, PropertyValueMap } from 'lit';
-import EventEmitter from 'eventemitter3';
 import * as lit_html from 'lit-html';
 
 type inputType = string | number | boolean;
@@ -73,7 +72,7 @@ declare function isUISelectable(element: any): boolean;
 declare function nowSelectable(element: any): boolean;
 declare function isUIPanel(element: any): boolean;
 
-declare class UIMaster extends EventEmitter {
+declare class UIMaster extends EventTarget {
     private static _instance;
     static getInstance(): UIMaster;
     static init(div: HTMLDivElement): UIMaster;
@@ -124,6 +123,7 @@ declare class UIMaster extends EventEmitter {
     back(): Promise<void>;
     findActiveUI(): void;
     private setActiveUI;
+    private setActiveChild;
     setActiveComponent(com?: UISelectable): boolean;
     removeIfActive(com: UIChild): void;
 }
@@ -132,6 +132,8 @@ declare let MI: UIMaster;
 declare function getSingletonUI<T extends UIBase>(classRef: new () => T): T;
 declare abstract class UIBase extends LitElement implements UI {
     static styles: CSSResultGroup;
+    static useTempCss: boolean;
+    static tempCss: CSSResultGroup | undefined;
     static eleName: string;
     protected static makeName(tagname: string): string;
     static createInstance(): UIBase;
@@ -222,12 +224,13 @@ declare class ScrollContainer extends Container {
     static readonly eleName: string;
     scrollable: boolean;
     scrollFloat: boolean;
+    scrollFloatSpeed: number;
     scrollDisplayBlock: number;
     static styles: CSSResultGroup;
-    callFromChild(child: UISelectable): void;
     wrapper: HTMLElement;
     setCursor(com?: UIChild, autoActive?: boolean): void;
     renderWrap(content: TemplateResult<1>): TemplateResult<1>;
+    captureInput(ip: Input): boolean;
 }
 
 declare class HoriContainer extends Container {
@@ -247,8 +250,9 @@ declare enum SwitchType {
     none = 2
 }
 declare class TabContainer extends Container {
-    static readonly eleName: string;
+    static eleName: string;
     static styles: CSSResultGroup;
+    static tempCss: lit.CSSResult;
     readonly loop: boolean;
     readonly showLR: boolean;
     readonly tabSelectable: boolean;
@@ -269,6 +273,7 @@ declare class TabContainer extends Container {
 }
 
 declare class GridContainer extends ScrollContainer {
+    static eleName: string;
     eachRow: number;
     moveCursor(x: number, y: number): boolean;
     renderWrap(content: TemplateResult<1>): TemplateResult<1>;
@@ -291,7 +296,6 @@ declare class MixContainer extends Container {
 }
 
 declare abstract class UISelectableBase extends UIChildBase {
-    static styles: CSSResultGroup;
     selected: boolean;
     triggered: boolean;
     label?: string;
@@ -307,8 +311,10 @@ declare abstract class UISelectableBase extends UIChildBase {
 }
 
 declare class Button extends UISelectableBase {
+    static eleName: string;
     constructor();
     selected: boolean;
+    static tempCss: lit.CSSResult;
     static styles: CSSResultGroup;
     playLockShake(): void;
     doPress(): boolean;
@@ -316,13 +322,14 @@ declare class Button extends UISelectableBase {
     captureInput(ip: Input): boolean;
 }
 
-declare class RangeComponent extends UISelectableBase {
+declare class RangeSlider extends UISelectableBase {
+    static eleName: string;
     value: number;
     min: number;
     max: number;
     each: number;
     useFloat: boolean;
-    static styles: lit.CSSResult[];
+    static tempCss: lit.CSSResult;
     renderCore(): TemplateResult<1>;
     onChange(e: Event): void;
     renderWrap(content: TemplateResult): TemplateResult<1>;
@@ -332,19 +339,19 @@ declare class RangeComponent extends UISelectableBase {
     captureInput(ip: Input): boolean;
 }
 
-declare class HorizontalSelector extends UISelectableBase {
+declare class RadioGroup extends UISelectableBase {
+    static eleName: string;
     value: string;
     readonly optionArray: string[];
     readonly radioName: string;
     constructor();
-    static styles: lit.CSSResult[];
+    static tempCss: lit.CSSResult;
     renderWrap(content: TemplateResult): TemplateResult<1>;
     renderOption(option: string): TemplateResult<1>;
     optionName: Map<string, string>;
     getOptionName(option: string): string;
     private _onChange;
     renderCore(): TemplateResult<1>;
-    render(): TemplateResult<1>;
     protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void;
     add(_add: -1 | 1): void;
     captureInput(ip: Input): boolean;
@@ -359,17 +366,17 @@ declare class CheckBox extends UISelectableBase {
 }
 
 declare class Selector extends UISelectableBase {
+    static eleName: string;
     value: string;
     readonly optionArray: string[];
     readonly radioName: string;
     constructor();
-    static styles: lit.CSSResult[];
+    static tempCss: lit.CSSResult;
     renderWrap(content: TemplateResult): TemplateResult<1>;
     optionName: Map<string, string>;
     getOptionName(option: string): string;
     private _onChange;
     renderCore(): TemplateResult<1>;
-    render(): TemplateResult<1>;
     protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void;
     add(_add: -1 | 1): void;
     captureInput(ip: Input): boolean;
@@ -415,4 +422,4 @@ declare class AlertPanel extends UIPanelBase {
     captureInput(ip: Input): boolean;
 }
 
-export { AlertPanel, Button, CheckBox, Container, GridContainer, HoriContainer, HorizontalSelector, Layer, ListContainer, MI, MixContainer, RangeComponent, ScrollContainer, Selector, TabContainer, type UI, UIBG, UIBase, type UIChild, UIChildBase, type UIInput, type UIInteractive, UIInteractiveBase, UIMaster, type UIPanel, UIPanelBase, type UIParent, type UIParentRoot, UIParentRootBase, type UISelectable, anyPlayerPress, anyPress, centerCSS, clamp, deepEqual, delay, flexCenterCSS, fullScreenCSS, getRect, getSingletonUI, h, type inputType, isContainer, isUIChild, isUIChildRoof, isUIPanel, isUIParent, isUIParentRoot, isUISelectable, l, nextTick, nowSelectable, removeElementWithIndex, s, styled, w };
+export { AlertPanel, Button, CheckBox, Container, GridContainer, HoriContainer, Layer, ListContainer, MI, MixContainer, RadioGroup, RangeSlider, ScrollContainer, Selector, TabContainer, type UI, UIBG, UIBase, type UIChild, UIChildBase, type UIInput, type UIInteractive, UIInteractiveBase, UIMaster, type UIPanel, UIPanelBase, type UIParent, type UIParentRoot, UIParentRootBase, type UISelectable, anyPlayerPress, anyPress, centerCSS, clamp, deepEqual, delay, flexCenterCSS, fullScreenCSS, getRect, getSingletonUI, h, type inputType, isContainer, isUIChild, isUIChildRoof, isUIPanel, isUIParent, isUIParentRoot, isUISelectable, l, nextTick, nowSelectable, removeElementWithIndex, s, styled, w };

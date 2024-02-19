@@ -32,6 +32,9 @@ export abstract class UIBase extends LitElement implements UI{
     }
     `]
 
+    static useTempCss:boolean=false;
+    static tempCss:CSSResultGroup|undefined;
+
     static eleName:string='';
 
     protected static makeName(tagname:string):string{
@@ -89,6 +92,9 @@ export abstract class UIBase extends LitElement implements UI{
     }
 
     render(){
+        if(this.constructor.hasOwnProperty('tempCss') || (this.constructor as unknown as typeof UIBase).useTempCss){
+            return html`<style>${(this.constructor as unknown as typeof UIBase).tempCss}</style>${this.renderWrap(this.renderCore())}`;
+        }
         return this.renderWrap(this.renderCore());
     }
 

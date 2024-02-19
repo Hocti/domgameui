@@ -1,8 +1,8 @@
-import { YES, PAUSE, click, InputSource, ControlWrap, UDLR, L1R1, LR, UDLRpressing, NO } from "controlwrap";
+import { YES, PAUSE, click, InputSource, ControlWrap, UDLR, UDLRpressing, L1R1, LR, NO } from "controlwrap";
 /*!
  * domgameui - v1.0.0
  * By hocti
- * Compiled Wed, 14 Feb 2024 19:38:56 UTC
+ * Compiled Mon, 19 Feb 2024 08:50:33 UTC
  *
  * domgameui is licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license
@@ -635,121 +635,6 @@ function removeElementWithIndex(array, index) {
   return index < 0 || index >= array.length ? array : array.slice(0, index).concat(array.slice(index + 1));
 }
 const s2 = (v2) => i$2`calc(${v2} * var(--rootS))`, l = (v2) => i$2`calc(${v2} * var(--rootL))`, w = (v2) => i$2`calc(${v2} / 100 * var(--rootWidth))`, h = (v2) => i$2`calc(${v2} / 100 * var(--rootHeight))`;
-function getDefaultExportFromCjs(x2) {
-  return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2.default : x2;
-}
-var eventemitter3 = { exports: {} };
-(function(module) {
-  var has = Object.prototype.hasOwnProperty, prefix = "~";
-  function Events() {
-  }
-  Object.create && (Events.prototype = /* @__PURE__ */ Object.create(null), new Events().__proto__ || (prefix = !1));
-  function EE(fn, context, once) {
-    this.fn = fn, this.context = context, this.once = once || !1;
-  }
-  function addListener(emitter, event, fn, context, once) {
-    if (typeof fn != "function")
-      throw new TypeError("The listener must be a function");
-    var listener = new EE(fn, context || emitter, once), evt = prefix ? prefix + event : event;
-    return emitter._events[evt] ? emitter._events[evt].fn ? emitter._events[evt] = [emitter._events[evt], listener] : emitter._events[evt].push(listener) : (emitter._events[evt] = listener, emitter._eventsCount++), emitter;
-  }
-  function clearEvent(emitter, evt) {
-    --emitter._eventsCount === 0 ? emitter._events = new Events() : delete emitter._events[evt];
-  }
-  function EventEmitter2() {
-    this._events = new Events(), this._eventsCount = 0;
-  }
-  EventEmitter2.prototype.eventNames = function() {
-    var names = [], events, name;
-    if (this._eventsCount === 0)
-      return names;
-    for (name in events = this._events)
-      has.call(events, name) && names.push(prefix ? name.slice(1) : name);
-    return Object.getOwnPropertySymbols ? names.concat(Object.getOwnPropertySymbols(events)) : names;
-  }, EventEmitter2.prototype.listeners = function(event) {
-    var evt = prefix ? prefix + event : event, handlers = this._events[evt];
-    if (!handlers)
-      return [];
-    if (handlers.fn)
-      return [handlers.fn];
-    for (var i2 = 0, l2 = handlers.length, ee = new Array(l2); i2 < l2; i2++)
-      ee[i2] = handlers[i2].fn;
-    return ee;
-  }, EventEmitter2.prototype.listenerCount = function(event) {
-    var evt = prefix ? prefix + event : event, listeners = this._events[evt];
-    return listeners ? listeners.fn ? 1 : listeners.length : 0;
-  }, EventEmitter2.prototype.emit = function(event, a1, a2, a3, a4, a5) {
-    var evt = prefix ? prefix + event : event;
-    if (!this._events[evt])
-      return !1;
-    var listeners = this._events[evt], len = arguments.length, args, i2;
-    if (listeners.fn) {
-      switch (listeners.once && this.removeListener(event, listeners.fn, void 0, !0), len) {
-        case 1:
-          return listeners.fn.call(listeners.context), !0;
-        case 2:
-          return listeners.fn.call(listeners.context, a1), !0;
-        case 3:
-          return listeners.fn.call(listeners.context, a1, a2), !0;
-        case 4:
-          return listeners.fn.call(listeners.context, a1, a2, a3), !0;
-        case 5:
-          return listeners.fn.call(listeners.context, a1, a2, a3, a4), !0;
-        case 6:
-          return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), !0;
-      }
-      for (i2 = 1, args = new Array(len - 1); i2 < len; i2++)
-        args[i2 - 1] = arguments[i2];
-      listeners.fn.apply(listeners.context, args);
-    } else {
-      var length = listeners.length, j2;
-      for (i2 = 0; i2 < length; i2++)
-        switch (listeners[i2].once && this.removeListener(event, listeners[i2].fn, void 0, !0), len) {
-          case 1:
-            listeners[i2].fn.call(listeners[i2].context);
-            break;
-          case 2:
-            listeners[i2].fn.call(listeners[i2].context, a1);
-            break;
-          case 3:
-            listeners[i2].fn.call(listeners[i2].context, a1, a2);
-            break;
-          case 4:
-            listeners[i2].fn.call(listeners[i2].context, a1, a2, a3);
-            break;
-          default:
-            if (!args)
-              for (j2 = 1, args = new Array(len - 1); j2 < len; j2++)
-                args[j2 - 1] = arguments[j2];
-            listeners[i2].fn.apply(listeners[i2].context, args);
-        }
-    }
-    return !0;
-  }, EventEmitter2.prototype.on = function(event, fn, context) {
-    return addListener(this, event, fn, context, !1);
-  }, EventEmitter2.prototype.once = function(event, fn, context) {
-    return addListener(this, event, fn, context, !0);
-  }, EventEmitter2.prototype.removeListener = function(event, fn, context, once) {
-    var evt = prefix ? prefix + event : event;
-    if (!this._events[evt])
-      return this;
-    if (!fn)
-      return clearEvent(this, evt), this;
-    var listeners = this._events[evt];
-    if (listeners.fn)
-      listeners.fn === fn && (!once || listeners.once) && (!context || listeners.context === context) && clearEvent(this, evt);
-    else {
-      for (var i2 = 0, events = [], length = listeners.length; i2 < length; i2++)
-        (listeners[i2].fn !== fn || once && !listeners[i2].once || context && listeners[i2].context !== context) && events.push(listeners[i2]);
-      events.length ? this._events[evt] = events.length === 1 ? events[0] : events : clearEvent(this, evt);
-    }
-    return this;
-  }, EventEmitter2.prototype.removeAllListeners = function(event) {
-    var evt;
-    return event ? (evt = prefix ? prefix + event : event, this._events[evt] && clearEvent(this, evt)) : (this._events = new Events(), this._eventsCount = 0), this;
-  }, EventEmitter2.prototype.off = EventEmitter2.prototype.removeListener, EventEmitter2.prototype.addListener = EventEmitter2.prototype.on, EventEmitter2.prefixed = prefix, EventEmitter2.EventEmitter = EventEmitter2, module.exports = EventEmitter2;
-})(eventemitter3);
-var eventemitter3Exports = eventemitter3.exports, EventEmitter = /* @__PURE__ */ getDefaultExportFromCjs(eventemitter3Exports);
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -917,7 +802,7 @@ class UIBase extends s$1 {
     return content;
   }
   render() {
-    return this.renderWrap(this.renderCore());
+    return this.constructor.hasOwnProperty("tempCss") || this.constructor.useTempCss ? x`<style>${this.constructor.tempCss}</style>${this.renderWrap(this.renderCore())}` : this.renderWrap(this.renderCore());
   }
   show() {
     this.style.display = "block", this._isDisplay = !0;
@@ -954,7 +839,7 @@ UIBase.styles = [i$2`
         display:block;
         box-sizing:border-box;
     }
-    `], UIBase.eleName = "", UIBase.initedNode = /* @__PURE__ */ new Set(), //================================================================================
+    `], UIBase.useTempCss = !1, UIBase.eleName = "", UIBase.initedNode = /* @__PURE__ */ new Set(), //================================================================================
 UIBase.suspendOnExit = !1;
 class UIInteractiveBase extends UIBase {
   constructor() {
@@ -1076,7 +961,7 @@ RootScreen.styles = [
   t("root-screen")
 ], RootScreen);
 const layerNames = ["bg", "game", "main", "panel", "fg"];
-class UIMaster extends EventEmitter {
+class UIMaster extends EventTarget {
   constructor(_div) {
     super(), this.layers = {}, this.lastSize = { w: 0, h: 0 }, this._fontsize = 12, this.minRatio = 5 / 4, this.maxRatio = 32 / 9, this.minWidth = 1280, this.minHeight = 720, this.fontSizeOnMin = 12, this.scaleAble = !0, this.fixSize = !1, this.hideMouseWhenKeyPress = !0, this.activePanels = [], this.breadCrumb = [], this._div = _div, this._div.style.overflow = "hidden", window.addEventListener("resize", this.onReisze.bind(this)), this.onReisze(), setTimeout(this.onReisze.bind(this), 0), j(x`<root-screen>
             <domui-layer name="bg" noninteractive></domui-layer>
@@ -1120,13 +1005,13 @@ class UIMaster extends EventEmitter {
     this.fixSize = !0, this.innerSetSize(Math.max(this.minWidth, w2), Math.max(this.minHeight, h2), scale);
   }
   innerSetSize(newWidth, newHeight, scale = 1) {
-    this._fontsize = Math.min(newWidth / this.minWidth, newHeight / this.minHeight) * this.fontSizeOnMin, this.rootElement && (this.rootElement.style.setProperty("--rootWidth", newWidth + "px"), this.rootElement.style.setProperty("--rootHeight", newHeight + "px"), this.rootElement.style.setProperty("--rootS", Math.min(newHeight, newWidth) / 100 + "px"), this.rootElement.style.setProperty("--rootL", Math.max(newHeight, newWidth) / 100 + "px"), this.rootElement.style.setProperty("--rootFontsize", this._fontsize + "px"), this.rootElement.style.fontSize = this._fontsize + "px", this.rootElement.style.width = newWidth + "px", this.rootElement.style.height = newHeight + "px", scale !== 1 ? (this.rootElement.style.scale = scale.toString(), this.rootElement.style.transformOrigin = "top left") : (this.rootElement.style.scale = "", this.rootElement.style.transformOrigin = ""), this.rootElement.style.left = Math.round((this._div.clientWidth - newWidth * scale) / 2) + "px", this.rootElement.style.top = Math.round((this._div.clientHeight - newHeight * scale) / 2) + "px"), (this.lastSize.w != newWidth || this.lastSize.h != newHeight) && (this.emit("resize", {
+    this._fontsize = Math.min(newWidth / this.minWidth, newHeight / this.minHeight) * this.fontSizeOnMin, this.rootElement && (this.rootElement.style.setProperty("--rootWidth", newWidth + "px"), this.rootElement.style.setProperty("--rootHeight", newHeight + "px"), this.rootElement.style.setProperty("--rootS", Math.min(newHeight, newWidth) / 100 + "px"), this.rootElement.style.setProperty("--rootL", Math.max(newHeight, newWidth) / 100 + "px"), this.rootElement.style.setProperty("--rootFontsize", this._fontsize + "px"), this.rootElement.style.fontSize = this._fontsize + "px", this.rootElement.style.width = newWidth + "px", this.rootElement.style.height = newHeight + "px", scale !== 1 ? (this.rootElement.style.scale = scale.toString(), this.rootElement.style.transformOrigin = "top left") : (this.rootElement.style.scale = "", this.rootElement.style.transformOrigin = ""), this.rootElement.style.left = Math.round((this._div.clientWidth - newWidth * scale) / 2) + "px", this.rootElement.style.top = Math.round((this._div.clientHeight - newHeight * scale) / 2) + "px"), (this.lastSize.w != newWidth || this.lastSize.h != newHeight) && (this.dispatchEvent(new CustomEvent("resize", { detail: {
       oldWidth: this.lastSize.w,
       oldHeight: this.lastSize.h,
       newWidth,
       newHeight,
       fontSize: this._fontsize
-    }), this.lastSize.w = newWidth, this.lastSize.h = newHeight);
+    } })), this.lastSize.w = newWidth, this.lastSize.h = newHeight);
   }
   frameUpdate(inputs) {
     if (this.activeGame && this.activeUI === this.activeGame)
@@ -1143,8 +1028,18 @@ class UIMaster extends EventEmitter {
         }
         if (captured)
           return;
-      } else
-        this.activeUI && inputs.ui.ui_tap.length > 0 && this.activeUI.findAndActiveFirstSelectable();
+      } else if (this.activeUI && inputs.ui.ui_tap.length > 0 && this.activeUI.findAndActiveFirstSelectable(), this.activeChild) {
+        let captured = this.activeChild.captureInput(inputs.ui), target = this.activeChild;
+        for (; !captured; ) {
+          const parent = target.getParent();
+          if (parent && isUIChild(parent))
+            target = parent, captured = target.captureInput(inputs.ui);
+          else
+            break;
+        }
+        if (captured)
+          return;
+      }
       this.activeUI && (this.activeUI.captureAllInput(inputs), this.activeUI.captureInput(inputs.ui)), this.lastInputs = inputs;
     }
   }
@@ -1202,11 +1097,27 @@ class UIMaster extends EventEmitter {
     const result = this.activeUI.findAndActiveFirstSelectable();
     this.setActiveComponent(result);
   }
+  setActiveChild() {
+    setTimeout(() => {
+      if (!this.activeUI) {
+        this.activeChild = void 0, update("activeChild", this.activeChild);
+        return;
+      }
+      if (!this.activeChild && this.activeUI.cursorChild && isUIParent(this.activeUI.cursorChild)) {
+        let currChild = this.activeUI.cursorChild;
+        for (; currChild.cursorChild && isUIParent(currChild.cursorChild); )
+          currChild = currChild.cursorChild;
+        this.activeChild = currChild, console.log("setActiveUI4", this.activeChild), update("activeChild", this.activeChild);
+        return;
+      }
+      this.activeChild = void 0, update("activeChild", this.activeChild);
+    });
+  }
   setActiveComponent(com) {
     if (this.activeComponent === com)
       return !0;
     if (this.activeComponent && (this.activeComponent.active = !1), !com || com.isConnected === !1)
-      return this.activeComponent = void 0, update("activeComponent", void 0), !0;
+      return this.activeComponent = void 0, update("activeComponent", void 0), this.setActiveChild(), !0;
     const comRoot = com.getRoot();
     if (!this.activeUI)
       this.activeUI = comRoot;
@@ -1426,26 +1337,10 @@ var __defProp$a = Object.defineProperty, __getOwnPropDesc$a = Object.getOwnPrope
 };
 class ScrollContainer extends Container {
   constructor() {
-    super(...arguments), this.scrollable = !0, this.scrollFloat = !1, this.scrollDisplayBlock = 5;
+    super(...arguments), this.scrollable = !0, this.scrollFloat = !1, this.scrollFloatSpeed = 2, this.scrollDisplayBlock = 0;
   }
-  callFromChild(child) {
-  }
-  /*
-      protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-          super.firstUpdated(_changedProperties);
-          //*event resize
-      }
-  
-      constructor() {
-          super();
-          this.addEventListener('slotchange', (e) => {
-              console.log('slotchange')
-              this.requestUpdate();
-          });
-        }
-      */
   setCursor(com, autoActive = !0) {
-    if (super.setCursor(com, autoActive), this.uiChildren.length > 0 && this.cursorChild && this.wrapper) {
+    if (super.setCursor(com, autoActive), this.scrollable && !this.scrollFloat && this.uiChildren.length > 0 && this.cursorChild && this.wrapper) {
       const WB = this.getBoundingClientRect(), currentTargetY = Math.round(this.wrapper.scrollTop + this.cursorChild.getBoundingClientRect().top - WB.top), containerHeight = WB.bottom - WB.top;
       let newY = this.wrapper.scrollTop;
       currentTargetY < this.wrapper.scrollTop ? newY = currentTargetY : currentTargetY > this.wrapper.scrollTop + containerHeight / this.scrollDisplayBlock * (this.scrollDisplayBlock - 1) && (newY = currentTargetY - containerHeight / this.scrollDisplayBlock * (this.scrollDisplayBlock - 1)), this.wrapper.scrollTop = clamp(newY, 0, this.wrapper.scrollHeight);
@@ -1473,6 +1368,14 @@ class ScrollContainer extends Container {
     }
     return x`<style></style><div class='wrapper'>${content}</div>`;
   }
+  captureInput(ip) {
+    const result = super.captureInput(ip);
+    if (!result && this.scrollFloat && this.scrollable) {
+      const pressingY = UDLRpressing(ip).y;
+      pressingY && (this.wrapper.scrollTop += pressingY * this.scrollFloatSpeed);
+    }
+    return result;
+  }
 }
 ScrollContainer.eleName = "domui-scroll-container", ScrollContainer.styles = [i$2`
      :host {
@@ -1493,6 +1396,8 @@ ScrollContainer.eleName = "domui-scroll-container", ScrollContainer.styles = [i$
 ], ScrollContainer.prototype, "scrollable", 2), __decorateClass$a([
   n2({ type: Boolean })
 ], ScrollContainer.prototype, "scrollFloat", 2), __decorateClass$a([
+  n2({ type: Boolean })
+], ScrollContainer.prototype, "scrollFloatSpeed", 2), __decorateClass$a([
   n2({ type: Number })
 ], ScrollContainer.prototype, "scrollDisplayBlock", 2), __decorateClass$a([
   e(".wrapper")
@@ -1555,23 +1460,19 @@ class UISelectableBase extends UIChildBase {
     return this.lock ? "locked!" : this.hints;
   }
 }
-UISelectableBase.styles = [i$2`
-    :host {
-        display:block;
-    }
-    `], __decorateClass$9([
+__decorateClass$9([
   n2({ type: Boolean })
 ], UISelectableBase.prototype, "lock", 2), __decorateClass$9([
   n2({ type: Boolean })
 ], UISelectableBase.prototype, "active", 2), __decorateClass$9([
   n2({ type: Function })
 ], UISelectableBase.prototype, "callback", 2);
-var __defProp$8 = Object.defineProperty, __getOwnPropDesc$8 = Object.getOwnPropertyDescriptor, __decorateClass$8 = (decorators, target, key, kind) => {
+var __defProp$8 = Object.defineProperty, __getOwnPropDesc$8 = Object.getOwnPropertyDescriptor, __getProtoOf$2 = Object.getPrototypeOf, __reflectGet$2 = Reflect.get, __decorateClass$8 = (decorators, target, key, kind) => {
   for (var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$8(target, key) : target, i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     (decorator = decorators[i2]) && (result = (kind ? decorator(target, key, result) : decorator(result)) || result);
   return kind && result && __defProp$8(target, key, result), result;
-};
-class Button extends UISelectableBase {
+}, __superGet$2 = (cls, obj, key) => __reflectGet$2(__getProtoOf$2(cls), key, obj);
+const _Button = class extends UISelectableBase {
   /*
   
       constructor(title:string,callback:()=>void,hints?:string){
@@ -1595,45 +1496,48 @@ class Button extends UISelectableBase {
   captureInput(ip) {
     return YES(ip) ? (this.doPress(), !0) : !1;
   }
-}
-Button.styles = [
-  i$2`
-        :host{
-            display:inline-block;
-            border: 1px solid green;
-        }
-        :host(.active){
-            background-color:yellow;
-        }
-        :host([turnOn]){
-            background-color:yellow;
-        }
-
-        button{
-            cursor:pointer;
-            transition: box-shadow 0.5s;
-        }
-        :host(.active) button{
-            box-shadow: yellow 2px 2px 25px;
-            border: 2px solid red;
-        }
-        :host(.unselectable) button{
-            cursor:not-allowed;
-            opacity:0.2;
-        }
-        :host(.lock) button{
-            cursor:not-allowed;
-            opacity:0.5;
-        }
-        `
-], __decorateClass$8([
+};
+_Button.eleName = "domui-button", _Button.tempCss = i$2`
+    :host{
+        border: 1px solid green;
+    }
+    :host(.active){
+        background-color:yellow;
+    }
+    :host([turnOn]){
+        background-color:yellow;
+    }
+    button{
+        cursor:pointer;
+        transition: box-shadow 0.5s;
+    }
+    :host(.active) button{
+        box-shadow: yellow 2px 2px 25px;
+        border: 2px solid red;
+    }
+    :host(.unselectable) button{
+        cursor:not-allowed;
+        opacity:0.2;
+    }
+    :host(.lock) button{
+        opacity:0.5;
+    }
+    `, _Button.styles = [...__superGet$2(_Button, _Button, "styles") ? [__superGet$2(_Button, _Button, "styles")] : [], i$2`
+    :host{
+        display:inline-block;
+    }
+    :host(.lock){
+        cursor:not-allowed;
+    }
+    `], __decorateClass$8([
   n2({ type: Boolean })
-], Button.prototype, "selected", 2);
-var __defProp$7 = Object.defineProperty, __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor, __getProtoOf$2 = Object.getPrototypeOf, __reflectGet$2 = Reflect.get, __decorateClass$7 = (decorators, target, key, kind) => {
+], _Button.prototype, "selected", 2);
+let Button = _Button;
+var __defProp$7 = Object.defineProperty, __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor, __getProtoOf$1 = Object.getPrototypeOf, __reflectGet$1 = Reflect.get, __decorateClass$7 = (decorators, target, key, kind) => {
   for (var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$7(target, key) : target, i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     (decorator = decorators[i2]) && (result = (kind ? decorator(target, key, result) : decorator(result)) || result);
   return kind && result && __defProp$7(target, key, result), result;
-}, __superGet$2 = (cls, obj, key) => __reflectGet$2(__getProtoOf$2(cls), key, obj);
+}, __superGet$1 = (cls, obj, key) => __reflectGet$1(__getProtoOf$1(cls), key, obj);
 Button.prepare();
 HoriContainer.prepare();
 const _TabContainer = class extends Container {
@@ -1665,7 +1569,7 @@ const _TabContainer = class extends Container {
         `;
   }
   renderTabBtns() {
-    return x`
+    return console.log("renderTabBtns"), x`
         <div class="tabBtnsContainer">
             ${this.showLR ? x`<a @click=${this.prevTab} name="tab_prev" class="tab_LR"></a>` : x``}
             ${this.tabSelectable ? x`
@@ -1718,7 +1622,13 @@ const _TabContainer = class extends Container {
     return this.switchType === 0 ? num = L1R1(ip) : this.switchType === 1 && (num = LR(ip)), num === -1 ? (this.prevTab(), !0) : num === 1 ? (this.nextTab(), !0) : super.captureInput(ip);
   }
 };
-_TabContainer.eleName = "base-tab-container", _TabContainer.styles = [...__superGet$2(_TabContainer, _TabContainer, "styles") ? [__superGet$2(_TabContainer, _TabContainer, "styles")] : [], i$2`
+_TabContainer.eleName = "domui-tab-container", _TabContainer.styles = [...__superGet$1(_TabContainer, _TabContainer, "styles") ? [__superGet$1(_TabContainer, _TabContainer, "styles")] : [], i$2`
+    .tab_LR{
+        cursor: pointer;
+    }
+    .tabBtn{
+        cursor: pointer;
+    }
     .tabBtnsContainer{
         display: flex;
         justify-content: space-between;
@@ -1727,16 +1637,14 @@ _TabContainer.eleName = "base-tab-container", _TabContainer.styles = [...__super
     .tabBtns{
         display: flex;
         justify-content: center;
-    }
+    }`], _TabContainer.tempCss = i$2`
     .tabBtn{
         padding: 0.5rem 1rem;
-        cursor: pointer;
         &.active{
             border: 1px solid red;
         }
     }
     .tab_LR{
-        cursor: pointer;
         &:hover{
             border: 1px solid yellow;
         }
@@ -1747,15 +1655,15 @@ _TabContainer.eleName = "base-tab-container", _TabContainer.styles = [...__super
     .tab_LR[name="tab_next"]:before {
         content: "➡️"
     }
-    `], __decorateClass$7([
+    `, __decorateClass$7([
   n2({ type: Number })
 ], _TabContainer.prototype, "currentTabIndex", 2);
 let TabContainer = _TabContainer;
-var __defProp$6 = Object.defineProperty, __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor, __getProtoOf$1 = Object.getPrototypeOf, __reflectGet$1 = Reflect.get, __decorateClass$6 = (decorators, target, key, kind) => {
+var __defProp$6 = Object.defineProperty, __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor, __decorateClass$6 = (decorators, target, key, kind) => {
   for (var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$6(target, key) : target, i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     (decorator = decorators[i2]) && (result = (kind ? decorator(target, key, result) : decorator(result)) || result);
   return kind && result && __defProp$6(target, key, result), result;
-}, __superGet$1 = (cls, obj, key) => __reflectGet$1(__getProtoOf$1(cls), key, obj);
+};
 class GridContainer extends ScrollContainer {
   constructor() {
     super(...arguments), this.eachRow = 4;
@@ -1775,10 +1683,10 @@ class GridContainer extends ScrollContainer {
    `;
   }
 }
-__decorateClass$6([
+GridContainer.eleName = "domui-grid-container", __decorateClass$6([
   n2({ type: Number })
 ], GridContainer.prototype, "eachRow", 2);
-const _GridExtraContainer = class extends ScrollContainer {
+class GridExtraContainer extends ScrollContainer {
   constructor() {
     super(...arguments), this.eachRow = 5, this.eachCol = 4, this.cursorX = 0, this.cursorY = 0;
   }
@@ -1793,18 +1701,12 @@ const _GridExtraContainer = class extends ScrollContainer {
         <slot></slot>
     `;
   }
-};
-_GridExtraContainer.styles = [__superGet$1(_GridExtraContainer, _GridExtraContainer, "styles"), i$2`
-    :host {
-        
-    }
-    :slotted {
-    }
-   `], __decorateClass$6([
+}
+__decorateClass$6([
   n2({ type: Number })
-], _GridExtraContainer.prototype, "eachRow", 2), __decorateClass$6([
+], GridExtraContainer.prototype, "eachRow", 2), __decorateClass$6([
   n2({ type: Number })
-], _GridExtraContainer.prototype, "eachCol", 2);
+], GridExtraContainer.prototype, "eachCol", 2);
 const oppo = (i2) => i2 <= 1 ? i2 == 0 ? 1 : 0 : i2 == 2 ? 3 : 2;
 class MixContainer extends Container {
   constructor() {
@@ -1860,7 +1762,7 @@ var __defProp$5 = Object.defineProperty, __getOwnPropDesc$5 = Object.getOwnPrope
     (decorator = decorators[i2]) && (result = (kind ? decorator(target, key, result) : decorator(result)) || result);
   return kind && result && __defProp$5(target, key, result), result;
 };
-class RangeComponent extends UISelectableBase {
+class RangeSlider extends UISelectableBase {
   constructor() {
     super(...arguments), this.value = 0, this.min = 0, this.max = 100, this.each = 1, this.useFloat = !1;
   }
@@ -1911,29 +1813,29 @@ class RangeComponent extends UISelectableBase {
     return super.captureInput(ip);
   }
 }
-RangeComponent.styles = [i$2`
+RangeSlider.eleName = "domui-range", RangeSlider.tempCss = i$2`
         :host(.active) .rangeBox{
             .border: 3px solid red;
             box-shadow: yellow 2px 2px 25px;
         }
-    `], __decorateClass$5([
+    `, __decorateClass$5([
   n2({ type: Number })
-], RangeComponent.prototype, "value", 2), __decorateClass$5([
+], RangeSlider.prototype, "value", 2), __decorateClass$5([
   n2({ type: Number })
-], RangeComponent.prototype, "min", 2), __decorateClass$5([
+], RangeSlider.prototype, "min", 2), __decorateClass$5([
   n2({ type: Number })
-], RangeComponent.prototype, "max", 2), __decorateClass$5([
+], RangeSlider.prototype, "max", 2), __decorateClass$5([
   n2({ type: Number })
-], RangeComponent.prototype, "each", 2), __decorateClass$5([
+], RangeSlider.prototype, "each", 2), __decorateClass$5([
   n2({ type: Boolean })
-], RangeComponent.prototype, "useFloat", 2);
-RangeComponent.prepare();
+], RangeSlider.prototype, "useFloat", 2);
+RangeSlider.prepare();
 var __defProp$4 = Object.defineProperty, __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor, __decorateClass$4 = (decorators, target, key, kind) => {
   for (var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$4(target, key) : target, i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     (decorator = decorators[i2]) && (result = (kind ? decorator(target, key, result) : decorator(result)) || result);
   return kind && result && __defProp$4(target, key, result), result;
 };
-class HorizontalSelector extends UISelectableBase {
+class RadioGroup extends UISelectableBase {
   constructor() {
     super(), this.value = "", this.optionArray = [], this.optionName = /* @__PURE__ */ new Map(), this.optionArray = this.getAttribute("options").split(",");
     const initValue = this.getAttribute("value");
@@ -1965,16 +1867,18 @@ class HorizontalSelector extends UISelectableBase {
       const ip = this.shadowRoot?.querySelectorAll("input")[this.optionArray.indexOf(this.value)];
       ip ? ip.checked = !0 : console.log("not found", this.value);
     }, 0), x`
-        <a @click=${() => this.add(-1)}>Prev</a>
+        <a @click=${() => this.add(-1)} name="btn_prev" class="btn_LR"></a>
         ${this.optionArray.map((option) => this.renderOption(option))}
-        <a @click=${() => this.add(1)}>Next</a>`;
+        <a @click=${() => this.add(1)} name="btn_next" class="btn_LR"></a>`;
   }
-  render() {
-    return this.renderWrap(x`
-        ${this.renderCore()}
-        <p>${this.value}</p>
-        `);
+  /*
+  render():TemplateResult<1>{
+      return this.renderWrap(html`
+      ${this.renderCore()}
+      <p>${this.value}</p>
+      `)
   }
+  */
   /*
   protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
       super.firstUpdated(_changedProperties);
@@ -1998,14 +1902,26 @@ class HorizontalSelector extends UISelectableBase {
     return lr ? (this.add(lr), !0) : YES(ip) ? (this.add(1), !0) : !1;
   }
 }
-HorizontalSelector.styles = [i$2`
+RadioGroup.eleName = "domui-radio-group", RadioGroup.tempCss = i$2`
         :host(.active) .containBox{
             .border: 3px solid red;
             box-shadow: yellow 2px 2px 25px;
         }
-    `], __decorateClass$4([
+        .btn_LR{
+            cursor: pointer;
+            &:hover{
+                border: 1px solid yellow;
+            }
+        }
+        .btn_LR[name="btn_prev"]:before {
+            content: "⬅️"
+        }
+        .btn_LR[name="btn_next"]:before {
+            content: "➡️"
+        }
+    `, __decorateClass$4([
   n2({ type: String })
-], HorizontalSelector.prototype, "value", 2);
+], RadioGroup.prototype, "value", 2);
 var __defProp$3 = Object.defineProperty, __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor, __decorateClass$3 = (decorators, target, key, kind) => {
   for (var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$3(target, key) : target, i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
     (decorator = decorators[i2]) && (result = (kind ? decorator(target, key, result) : decorator(result)) || result);
@@ -2069,18 +1985,20 @@ class Selector extends UISelectableBase {
       const ip = this.shadowRoot?.querySelector("select");
       ip && (ip.value = this.value);
     }, 0), x`
-        <a @click=${() => this.add(-1)}>Prev</a>
+        <a @click=${() => this.add(-1)} name="btn_prev" class="btn_LR"></a>
         <select @change=${this._onChange}>
         ${this.optionArray.map((option) => x`<option value=${option}>${this.getOptionName(option)}</option>`)}
         </select>
-        <a @click=${() => this.add(1)}>Next</a>`;
+        <a @click=${() => this.add(1)} name="btn_next" class="btn_LR"></a>`;
   }
-  render() {
-    return this.renderWrap(x`
-        ${this.renderCore()}
-        <p>${this.value}</p>
-        `);
+  /*
+  render():TemplateResult<1>{
+      return this.renderWrap(html`
+      ${this.renderCore()}
+      <p>${this.value}</p>
+      `)
   }
+  */
   /*
   protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
       super.firstUpdated(_changedProperties);
@@ -2104,12 +2022,24 @@ class Selector extends UISelectableBase {
     return lr ? (this.add(lr), !0) : YES(ip) ? (this.add(1), !0) : !1;
   }
 }
-Selector.styles = [i$2`
+Selector.eleName = "domui-selector", Selector.tempCss = i$2`
         :host(.active) .containBox{
             .border: 3px solid red;
             box-shadow: yellow 2px 2px 25px;
         }
-    `], __decorateClass$2([
+        .btn_LR{
+            cursor: pointer;
+            &:hover{
+                border: 1px solid yellow;
+            }
+        }
+        .btn_LR[name="btn_prev"]:before {
+            content: "⬅️"
+        }
+        .btn_LR[name="btn_next"]:before {
+            content: "➡️"
+        }
+    `, __decorateClass$2([
   n2({ type: String })
 ], Selector.prototype, "value", 2);
 var __defProp$1 = Object.defineProperty, __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor, __decorateClass$1 = (decorators, target, key, kind) => {
@@ -2124,7 +2054,7 @@ class shortCutButton extends UIChildBase {
   firstUpdated(_changedProperties) {
     super.firstUpdated(_changedProperties), this.buttonName == "" && this.getParent()?.bindButton(this.buttonName, this.callback);
   }
-  render() {
+  renderCore() {
     return x`<button @click=${this.callback}><slot></slot></button>`;
   }
 }
@@ -2246,12 +2176,12 @@ export {
   Container,
   GridContainer,
   HoriContainer,
-  HorizontalSelector,
   Layer,
   ListContainer,
   MI,
   MixContainer,
-  RangeComponent,
+  RadioGroup,
+  RangeSlider,
   ScrollContainer,
   Selector,
   TabContainer,

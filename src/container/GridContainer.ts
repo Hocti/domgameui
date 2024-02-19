@@ -23,6 +23,8 @@ import { clamp } from '../utils';
 
 export default class GridContainer extends ScrollContainer{
 
+    static eleName:string='domui-grid-container';
+
     @property({type:Number})
     eachRow:number=4;
 
@@ -57,14 +59,6 @@ export default class GridContainer extends ScrollContainer{
 
 //*
 export class GridExtraContainer extends ScrollContainer{
-    
-    static styles:CSSResultGroup = [super.styles,css`
-    :host {
-        
-    }
-    :slotted {
-    }
-   `];
 
    @property({type:Number})
    eachRow:number=5;

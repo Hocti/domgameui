@@ -9,6 +9,10 @@ import {clamp} from '../utils'
 
 export class Selector extends BaseComponent{
 
+    
+
+    static eleName:string='domui-selector';
+
     @property({type:String})
     value:string='';
 
@@ -25,12 +29,24 @@ export class Selector extends BaseComponent{
         this.radioName='horizontalSelector'+Math.floor(Math.random()*1000000).toString(16);
     }
 
-    static styles = [css`
+    static tempCss=css`
         :host(.active) .containBox{
             .border: 3px solid red;
             box-shadow: yellow 2px 2px 25px;
         }
-    `]
+        .btn_LR{
+            cursor: pointer;
+            &:hover{
+                border: 1px solid yellow;
+            }
+        }
+        .btn_LR[name="btn_prev"]:before {
+            content: "⬅️"
+        }
+        .btn_LR[name="btn_next"]:before {
+            content: "➡️"
+        }
+    `;
 
     renderWrap(content:TemplateResult):TemplateResult<1>{
         return html`<div class='containBox'>${content}</div>`;
@@ -57,22 +73,24 @@ export class Selector extends BaseComponent{
             }
         },0)
         return html`
-        <a @click=${()=>this.add(-1)}>Prev</a>
+        <a @click=${()=>this.add(-1)} name="btn_prev" class="btn_LR"></a>
         <select @change=${this._onChange}>
         ${this.optionArray.map(option => html`<option value=${option}>${this.getOptionName(option)}</option>`)}
         </select>
-        <a @click=${()=>this.add(1)}>Next</a>`;
+        <a @click=${()=>this.add(1)} name="btn_next" class="btn_LR"></a>`;
         
         /*
         */
     }
     
+    /*
     render():TemplateResult<1>{
         return this.renderWrap(html`
         ${this.renderCore()}
         <p>${this.value}</p>
         `)
     }
+    */
 
     /*
     protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {

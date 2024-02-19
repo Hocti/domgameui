@@ -27,12 +27,6 @@ import {UIChildBase} from '../ui/SimpleBaseUI';
 
 export default abstract class UISelectableBase extends UIChildBase{
 
-    static styles:CSSResultGroup = [css`
-    :host {
-        display:block;
-    }
-    `]
-
     //================================================================
 
     selected:boolean=false;

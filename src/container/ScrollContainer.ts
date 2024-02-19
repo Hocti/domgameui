@@ -11,7 +11,7 @@
  */
 
 import {TemplateResult, css,CSSResultGroup, html, PropertyValueMap} from 'lit';
-import {Input,UD,LR} from 'controlwrap'
+import {Input,UD,UDLRpressing} from 'controlwrap'
 import Container from './Container'
 import {getParent,getRoot,setParentsCursorToMe} from '../ui/parentingUtils'
 import {UISelectable,UIChild,UIParent,UIParentRoot} from '../ui/UIInterface'
@@ -30,8 +30,11 @@ export default class ScrollContainer extends Container{
     @property({type:Boolean})
     scrollFloat:boolean=false;
 
+    @property({type:Boolean})
+    scrollFloatSpeed:number=2;
+
     @property({type:Number})
-    scrollDisplayBlock:number=5;
+    scrollDisplayBlock:number=0;
 
     static styles:CSSResultGroup = [css`
      :host {
@@ -49,33 +52,13 @@ export default class ScrollContainer extends Container{
      }
     `];
 
-
-    callFromChild(child:UISelectable){
-        
-    }
-
     @query('.wrapper')
     wrapper!:HTMLElement;
 
-    /*
-    protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-        super.firstUpdated(_changedProperties);
-        //*event resize
-    }
-
-    constructor() {
-        super();
-        this.addEventListener('slotchange', (e) => {
-            console.log('slotchange')
-            this.requestUpdate();
-        });
-      }
-    */
-
-        setCursor(com?:UIChild,autoActive:boolean=true):void{
+    setCursor(com?:UIChild,autoActive:boolean=true):void{
         super.setCursor(com,autoActive);
         
-        if (this.uiChildren.length>0 && this.cursorChild && this.wrapper) {
+        if (this.scrollable && !this.scrollFloat && this.uiChildren.length>0 && this.cursorChild && this.wrapper) {
             const WB=this.getBoundingClientRect();
             const currentTargetY=Math.round(this.wrapper.scrollTop+this.cursorChild.getBoundingClientRect().top-WB.top);
 
@@ -120,8 +103,17 @@ export default class ScrollContainer extends Container{
                 </style>
                 <div class='wrapper'>${content}</div>`;
         }
-
-        
         return html`<style></style><div class='wrapper'>${content}</div>`;
+    }
+
+    captureInput(ip:Input):boolean{
+        const result=super.captureInput(ip);
+        if(!result && this.scrollFloat && this.scrollable){
+            const pressingY=UDLRpressing(ip).y
+            if(pressingY){
+                    this.wrapper.scrollTop+=pressingY*this.scrollFloatSpeed;
+            }
+        }
+        return result;
     }
 }

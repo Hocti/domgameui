@@ -18,7 +18,7 @@ export default class shortCutButton extends UIChildBase{
         }
     }
 
-    render(): TemplateResult<1> {
+    renderCore():TemplateResult<1>{
         return html`<button @click=${this.callback}><slot></slot></button>`;
     }
 };

@@ -1,7 +1,6 @@
 
-import Button from './Button'; 
-export {Button};
-export *  from './RangeComponent';
-export *  from './HorizontalSelector';
+export *  from './Button';
+export *  from './RangeSlider';
+export *  from './RadioGroup';
 export * from './CheckBox';
 export * from './Selector';
