@@ -1,7 +1,7 @@
 {
 	"name": "domgameui",
-	"version": "1.0.0",
-	"description": "",
+	"version": "1.0.1",
+	"description": "creating game user interfaces using standard DOM elements, with gamepads or keyboard",
 	"main": "./dist/domgameui.cjs.js",
 	"module": "./dist/domgameui.esm.js",
 	"bundle": "./dist/domgameui.js",

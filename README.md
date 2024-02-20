@@ -1,8 +1,8 @@
 # DOM Game UI (with ControlWrap)
 
-`domgameui` is a lightweight, powerful UI framework built on top of `lit`](https://lit.dev/) for creating game user interfaces using standard DOM elements. Designed with game development in mind, it allows for intuitive navigation and interaction using gamepads and keyboards, without the need for a mouse or touch input(It's optional). This framework makes it easy to implement a cursor system, select items, and interact with a variety of UI components such as lists, grids, tab panels, buttons, selectors, checkboxes, range sliders, and radio button groups. Additionally, `dom game ui` offers robust support for multiplayer controls, enabling multiple players to interact with the UI simultaneously.
+`domgameui` is a lightweight, powerful UI framework built on top of [`lit`](https://lit.dev/) for creating game user interfaces using standard DOM elements. Designed with game development in mind, it allows for intuitive navigation and interaction using gamepads and keyboards, without the need for a mouse or touch input(It's optional). This framework makes it easy to implement a cursor system, select items, and interact with a variety of UI components such as lists, grids, tab panels, buttons, selectors, checkboxes, range sliders, and radio button groups. Additionally, `dom gameui` offers robust support for multiplayer controls, enabling multiple players to interact with the UI simultaneously.
 
-This project is dependent on the [`controlwrap`](https://www.npmjs.com/package/controlwrap) library, which provides the underlying input management and device abstraction necessary for `dom game ui` to function seamlessly across different input devices.
+This project is dependent on the [`controlwrap`](https://www.npmjs.com/package/controlwrap) library, which provides the underlying input management and device abstraction necessary for `domgameui` to function seamlessly across different input devices.
 
 ## Features
 
@@ -18,7 +18,7 @@ TBD
 
 ## Getting Started
 
-To get started with `dom game ui`, you'll need to install the package and its dependencies in your project.
+To get started with `domgameui`, you'll need to install the package and its dependencies in your project.
 
 ### Installation
 
@@ -58,7 +58,7 @@ UIMaster.getInstance().showMain(mainScreen.createInstance() as mainScreen).then(
 
 ### Concept
 
-The fundamental architecture of `dom game ui` is built around three primary class types you should extend: `SelectableComponent`, `Container`, and `RootView`, all orchestrated by the `UIMaster`.
+The fundamental architecture of `dom gameui` is built around three primary class types you should extend: `SelectableComponent`, `Container`, and `RootView`, all orchestrated by the `UIMaster`.
 
 - **SelectableComponent**: This includes UI elements like buttons, sliders, selectors, etc., representing the terminal nodes in the UI hierarchy.
 - **Container**: Examples include tab containers, lists, grids, etc. A container can encapsulate another container and is responsible for managing scrollbars.
@@ -81,8 +81,8 @@ All elements feature four lifecycle methods for visibility transitions: `enterAn
 
 ## Contributing
 
-We welcome contributions to `dom game ui`! If you're interested in helping improve the library, please take a look at our contributing guidelines. Whether it's adding new features, fixing bugs, or improving documentation, your help is greatly appreciated.
+We welcome contributions to `dom gameui`! If you're interested in helping improve the library, please take a look at our contributing guidelines. Whether it's adding new features, fixing bugs, or improving documentation, your help is greatly appreciated.
 
 ## License
 
-`dom game ui` is licensed under the MIT License. See the LICENSE file for more details.
+`dom gameui` is licensed under the MIT License. See the LICENSE file for more details.
