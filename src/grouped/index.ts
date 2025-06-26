@@ -1,2 +1,2 @@
-import {AlertPanel} from './AlertPanel';
+import { AlertPanel } from "./AlertPanel";
 export { AlertPanel };
