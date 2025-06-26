@@ -15,8 +15,7 @@
 import { CSSResultGroup, html, css, TemplateResult } from "lit";
 import BaseComponent from "./BaseComponent";
 import { Input, YES } from "controlwrap";
-import { customElement, property } from "lit/decorators.js";
-import { translate as t, initLitI18n } from "lit-i18n";
+import { property } from "lit/decorators.js";
 
 export class Button extends BaseComponent {
   static eleName: string = "domui-button";

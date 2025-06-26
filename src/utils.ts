@@ -1,16 +1,9 @@
 import {
-  Input,
-  YES,
-  NO,
-  PAUSE,
+  YES, PAUSE,
   click,
   InputGroup,
-  InputSource,
-  ControlWrap,
-  tap,
-  UIButtonOptional,
+  InputSource
 } from "controlwrap";
-import { css } from "lit";
 
 export const clamp = function (
   value: number,
@@ -106,8 +99,3 @@ export function removeElementWithIndex<T>(array: T[], index: number): T[] {
   }
   return array.slice(0, index).concat(array.slice(index + 1));
 }
-
-export const s = (v: number) => css`calc(${v} * var(--rootS))`;
-export const l = (v: number) => css`calc(${v} * var(--rootL))`;
-export const w = (v: number) => css`calc(${v} / 100 * var(--rootWidth))`;
-export const h = (v: number) => css`calc(${v} / 100 * var(--rootHeight))`;

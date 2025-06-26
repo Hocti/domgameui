@@ -1,10 +1,9 @@
 import { css, PropertyValueMap, html, CSSResultGroup } from "lit";
-import { query, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import Container from "./Container";
 import { HoriContainer } from "./ListContainer";
 import { Button } from "../component/Button";
-import { Input, UIButton, UIButtonOptional, LR, L1R1 } from "controlwrap";
-import { s } from "../utils";
+import { Input, LR, L1R1 } from "controlwrap";
 
 export type TabItemInfo = {
   label?: string;
@@ -138,24 +137,24 @@ export default class TabContainer extends Container {
     return html`
       <div class="tabBtnsContainer">
         ${this.showLR
-          ? html`<a @click=${this.prevTab} name="tab_prev" class="tab_LR"></a>`
-          : html``}
+        ? html`<a @click=${this.prevTab} name="tab_prev" class="tab_LR"></a>`
+        : html``}
         ${this.tabSelectable
-          ? html` <domui-hori-container class="tabBtns">
+        ? html` <domui-hori-container class="tabBtns">
               ${this.slotElements.map((v, i) =>
-                this.renderTabBtn((v as any).title, i),
-              )}
+          this.renderTabBtn((v as any).title, i),
+        )}
             </domui-hori-container>`
-          : html`
+        : html`
               <div class="tabBtns">
                 ${this.slotElements.map((v, i) =>
-                  this.renderTabBtn((v as any).title, i),
-                )}
+          this.renderTabBtn((v as any).title, i),
+        )}
               </div>
             `}
         ${this.showLR
-          ? html`<a @click=${this.nextTab} name="tab_next" class="tab_LR"></a>`
-          : html``}
+        ? html`<a @click=${this.nextTab} name="tab_next" class="tab_LR"></a>`
+        : html``}
       </div>
     `;
   }

@@ -2,7 +2,6 @@ import { html, css, TemplateResult, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import BaseComponent from "./BaseComponent";
 import { Input, LR, YES } from "controlwrap";
-import { clamp } from "../utils";
 
 //<my-horiselector title='difficulty' options='easy,normal,hard,very hard' callback=''></my-horiselector>
 

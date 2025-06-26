@@ -1,4 +1,4 @@
-import { Input, YES, NO, PAUSE } from "controlwrap";
+import { Input, YES, NO } from "controlwrap";
 //import {MI,UIPanelBase,HoriContainer, Button} from '../'
 import { MI } from "../UIMaster";
 import { UIPanelBase } from "../ui";
@@ -6,7 +6,7 @@ import { HoriContainer } from "../container";
 import { Button } from "../component";
 
 import { CSSResultGroup, html, css, render, TemplateResult } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 //import { translate as t } from 'lit-i18n';
 
 enum AlertType {
@@ -59,10 +59,10 @@ export class AlertPanel extends UIPanelBase {
                 >${this.buttonName("no")}</domui-button
               >
               ${this.withCancel
-                ? html`<domui-button @callback=${this.onCancel}
+            ? html`<domui-button @callback=${this.onCancel}
                     >${this.buttonName("cancel")}</domui-button
                   >`
-                : ""}
+            : ""}
             </domui-hori-container>
           `
         : ""}
@@ -74,10 +74,10 @@ export class AlertPanel extends UIPanelBase {
                 >${this.buttonName("confirm")}</domui-button
               >
               ${this.withCancel
-                ? html`<domui-button @callback=${this.onCancel}
+            ? html`<domui-button @callback=${this.onCancel}
                     >${this.buttonName("cancel")}</domui-button
                   >`
-                : ""}
+            : ""}
             </domui-hori-container>
           `
         : ""}

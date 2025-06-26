@@ -1,13 +1,6 @@
 import {
-  LitElement,
-  html,
-  css,
-  CSSResultGroup,
-  PropertyValueMap,
-  TemplateResult,
+  CSSResultGroup
 } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { UI } from "../ui/UIInterface";
 import { UIBase } from "../ui/SimpleBaseUI";
 
 export const styled = (

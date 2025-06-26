@@ -1,5 +1,4 @@
-import { LitElement, html, css, CSSResultGroup } from "lit";
-import { customElement, property, state, query } from "lit/decorators.js";
+import { css, CSSResultGroup } from "lit";
 import { UIBase } from "../ui/SimpleBaseUI";
 import { fullScreenCSS } from "./Layer";
 

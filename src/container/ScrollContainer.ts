@@ -14,20 +14,15 @@ import {
   TemplateResult,
   css,
   CSSResultGroup,
-  html,
-  PropertyValueMap,
+  html
 } from "lit";
-import { Input, UD, UDLRpressing } from "controlwrap";
+import { Input, UDLRpressing } from "controlwrap";
 import Container from "./Container";
-import { getParent, getRoot, setParentsCursorToMe } from "../ui/parentingUtils";
 import {
-  UISelectable,
-  UIChild,
-  UIParent,
-  UIParentRoot,
+  UIChild
 } from "../ui/UIInterface";
 import { clamp } from "../utils";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 
 export default class ScrollContainer extends Container {
   static readonly eleName: string = "domui-scroll-container";
@@ -80,8 +75,8 @@ export default class ScrollContainer extends Container {
       const WB = this.getBoundingClientRect();
       const currentTargetY = Math.round(
         this.wrapper.scrollTop +
-          this.cursorChild.getBoundingClientRect().top -
-          WB.top,
+        this.cursorChild.getBoundingClientRect().top -
+        WB.top,
       );
 
       const containerHeight = WB.bottom - WB.top;
@@ -94,13 +89,13 @@ export default class ScrollContainer extends Container {
       } else if (
         currentTargetY >
         this.wrapper.scrollTop +
-          (containerHeight / this.scrollDisplayBlock) *
-            (this.scrollDisplayBlock - 1)
+        (containerHeight / this.scrollDisplayBlock) *
+        (this.scrollDisplayBlock - 1)
       ) {
         newY =
           currentTargetY -
           (containerHeight / this.scrollDisplayBlock) *
-            (this.scrollDisplayBlock - 1);
+          (this.scrollDisplayBlock - 1);
       }
       this.wrapper.scrollTop = clamp(newY, 0, this.wrapper.scrollHeight);
     }
@@ -121,16 +116,16 @@ export default class ScrollContainer extends Container {
       }
       return html` <style>
           ${this.uiChildren.length > this.scrollDisplayBlock
-              ? css`
+          ? css`
                   .wrapper {
                   }
                 `
-              : css``}
+          : css``}
             .wrapper
             > ::slotted(*) {
             height: ${WB.height == 0
-              ? 100 / this.scrollDisplayBlock + "%"
-              : WB.height / this.scrollDisplayBlock + "px"};
+          ? 100 / this.scrollDisplayBlock + "%"
+          : WB.height / this.scrollDisplayBlock + "px"};
           }
         </style>
         <div class="wrapper">${content}</div>`;

@@ -1,5 +1,4 @@
-import { LitElement, html, css, CSSResultGroup } from "lit";
-import { customElement, property, state, query } from "lit/decorators.js";
+import { css } from "lit";
 import { styled } from "../extra/styled";
 
 export const fullScreenCSS = css`

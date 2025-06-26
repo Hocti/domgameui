@@ -11,11 +11,10 @@
  * onchange event/Call
  */
 
-import { html, css, TemplateResult, PropertyValueMap } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import BaseComponent from "./BaseComponent";
 import { Input, YES } from "controlwrap";
-import { clamp } from "../utils";
 
 export class CheckBox extends BaseComponent {
   @property({ type: Boolean })

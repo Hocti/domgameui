@@ -1,11 +1,5 @@
-import { Input, UIButton, UIButtonOptional, L1R1, LR, UD } from "controlwrap";
-import { css, html, CSSResultGroup, PropertyValueMap } from "lit";
-import { styleMap } from "lit/directives/style-map.js";
-import { customElement, property, state, query } from "lit/decorators.js";
-import { nowSelectable } from "../ui/UIInterface";
 import Container from "./Container";
-import { UIChild, UISelectable } from "../ui";
-import { clamp } from "../utils";
+import { UIChild } from "../ui";
 
 export default class OrderContainer extends Container {
   moveCursor(x: number, y: number): boolean {

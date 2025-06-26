@@ -7,14 +7,9 @@
  *
  *
  */
-import { Input, UIButton, UIButtonOptional, L1R1, LR, UD } from "controlwrap";
-import { css, html, CSSResultGroup, PropertyValueMap } from "lit";
-import { customElement, property, state, query } from "lit/decorators.js";
-import { nowSelectable } from "../ui/UIInterface";
+import { css, CSSResultGroup } from "lit";
 import Container from "./Container";
 import ScrollContainer from "./ScrollContainer";
-import { UIChild, UISelectable } from "../ui";
-import { clamp, s } from "../utils";
 
 export class HoriContainer extends Container {
   static styles: CSSResultGroup = [

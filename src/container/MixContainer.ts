@@ -7,7 +7,6 @@
  * function check all linked
  */
 import Container from "./Container";
-import { UIChild } from "../ui";
 import { getRect } from "../utils";
 
 const oppo = (i: number): number =>
@@ -135,7 +134,7 @@ export default class MixContainer extends Container {
   moveCursor(x: number, y: number): boolean {
     const newIndex =
       this.childUDLR[this.cursorIndex][
-        x == 1 ? 3 : x == -1 ? 2 : y == -1 ? 0 : 1
+      x == 1 ? 3 : x == -1 ? 2 : y == -1 ? 0 : 1
       ];
     if (newIndex >= 0 && newIndex !== this.cursorIndex) {
       this.setCursorById(newIndex, true);

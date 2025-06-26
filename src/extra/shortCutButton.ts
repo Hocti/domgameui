@@ -1,15 +1,10 @@
 import {
-  LitElement,
-  html,
-  css,
-  CSSResultGroup,
-  PropertyValueMap,
-  TemplateResult,
+  html, PropertyValueMap,
+  TemplateResult
 } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { UI } from "../ui/UIInterface";
+import { property } from "lit/decorators.js";
 import { Input } from "controlwrap";
-import { UIBase, UIChildBase } from "../ui/SimpleBaseUI";
+import { UIChildBase } from "../ui/SimpleBaseUI";
 
 export default class shortCutButton extends UIChildBase {
   @property({ type: String })

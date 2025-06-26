@@ -1,18 +1,17 @@
-import { Input } from "controlwrap";
 import {
-  UIPanel,
-  UIInteractive,
-  UIParent,
-  UIChild,
-  UISelectable,
-  UIInput,
-  inputType,
+  UIPanel
 } from "./UIInterface";
 import { UIParentRootBase } from "./UIParentBase";
 import { css, CSSResultGroup } from "lit";
 import { centerCSS } from "./Layer";
-import { s, w, h } from "../utils";
 import UIMaster from "../UIMaster";
+
+
+const s = (v: number) => css`calc(${v} * var(--rootS))`;
+//const l = (v: number) => css`calc(${v} * var(--rootL))`;
+const w = (v: number) => css`calc(${v} / 100 * var(--rootWidth))`;
+const h = (v: number) => css`calc(${v} / 100 * var(--rootHeight))`;
+
 
 export abstract class UIPanelBase extends UIParentRootBase implements UIPanel {
   //panel

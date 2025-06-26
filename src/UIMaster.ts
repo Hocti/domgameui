@@ -1,4 +1,4 @@
-import { Input, InputSource, InputGroup, ControlWrap } from "controlwrap";
+import { InputGroup, ControlWrap } from "controlwrap";
 //import {UI,UIRoot,UIType} from './ui'
 import {
   UI,
@@ -8,23 +8,16 @@ import {
   UIParent,
   isUIParent,
   UIChild,
-  isUIChild,
-  isContainer,
+  isUIChild
 } from "./ui/UIInterface";
-import { styled } from "./extra/styled";
 import * as utils from "./utils";
 //import EventEmitter from 'eventemitter3';
 import { LitElement, html, css, CSSResultGroup, render } from "lit";
 import {
-  customElement,
-  property,
-  state,
-  query,
-  queryAsync,
+  customElement
 } from "lit/decorators.js";
-import { Layer, fullScreenCSS } from "./ui/Layer";
+import { fullScreenCSS } from "./ui/Layer";
 import * as log from "update-log";
-import { UIBase } from "./ui/SimpleBaseUI";
 //Layer;
 
 @customElement("root-screen")
@@ -45,19 +38,6 @@ export class RootScreen extends LitElement {
     return html`<slot></slot>`;
   }
 }
-/*
-styled('root-screen',css`
-:host{
-    ${fullScreenCSS}
-    overflow:hidden;
-    user-select: none;
-    cursor: none;
-}
-:host(.hideMouse){
-    cursor: none;
-}
-`)
-*/
 
 const layerNames = ["bg", "game", "main", "panel", "fg"];
 

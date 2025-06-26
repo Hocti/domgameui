@@ -10,8 +10,6 @@
  *
  */
 
-import { TemplateResult, css, CSSResultGroup, html } from "lit";
-import { Input, UD, LR } from "controlwrap";
 import UIParentBase from "../ui/UIParentBase";
 import { getParent, getRoot, setParentsCursorToMe } from "../ui/parentingUtils";
 import {
@@ -20,12 +18,10 @@ import {
   UIParent,
   UIParentRoot,
 } from "../ui/UIInterface";
-import { customElement, property } from "lit/decorators.js";
 
 export default class Container
   extends UIParentBase
-  implements UIChild, UIParent
-{
+  implements UIChild, UIParent {
   getParent(): UIParent | undefined {
     return getParent(this);
   }
@@ -38,5 +34,5 @@ export default class Container
 
   static readonly eleName: string = "domui-container";
 
-  callFromChild(child: UISelectable) {}
+  callFromChild(child: UISelectable) { }
 }
