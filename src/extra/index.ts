@@ -1,2 +1,2 @@
-export * from "./shortCutButton";
-export * from "./styled";
+export * from './shortCutButton';
+export * from './styled';

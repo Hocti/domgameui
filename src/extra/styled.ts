@@ -1,22 +1,20 @@
-import {
-  CSSResultGroup
-} from "lit";
-import { UIBase } from "../ui/SimpleBaseUI";
+import { CSSResultGroup } from 'lit';
+import { UIBase } from '../ui/SimpleBaseUI';
 
 export const styled = (
-  name: string,
-  styles: CSSResultGroup,
-  superclass: typeof UIBase = UIBase,
+	name: string,
+	styles: CSSResultGroup,
+	superclass: typeof UIBase = UIBase
 ): typeof superclass => {
-  const ele: typeof superclass = class extends superclass {
-    static eleName: string = name;
-    static styles: CSSResultGroup = [
-      ...(super.styles ? [super.styles] : []),
-      styles,
-    ];
-  };
-  ele.prepare(name);
-  return ele;
+	const ele: typeof superclass = class extends superclass {
+		static eleName: string = name;
+		static styles: CSSResultGroup = [
+			...(super.styles ? [super.styles] : []),
+			styles,
+		];
+	};
+	ele.prepare(name);
+	return ele;
 };
 /*
 type mixed = new () => UIBase;// & { asd?: number };

@@ -1,30 +1,32 @@
-import Container from "./Container";
-import { UIChild } from "../ui";
+import Container from './Container';
+import { UIChild } from '../ui';
 
 export default class OrderContainer extends Container {
-  moveCursor(x: number, y: number): boolean {
-    if (this.cursorChild) {
-      const attrName =
-        x != 0
-          ? x < 0
-            ? "orderleft"
-            : "orderright"
-          : y < 0
-            ? "orderup"
-            : "orderdown";
-      const targetName = this.cursorChild?.getAttribute(attrName);
-      if (targetName) {
-        //*(not tested yet)
-        let com = this.shadowRoot!.querySelector(`[orderName=${targetName}]`);
-        if (com) {
-          this.setCursor(com as UIChild, true);
-          return true;
-        }
-      }
-    }
+	moveCursor(x: number, y: number): boolean {
+		if (this.cursorChild) {
+			const attrName =
+				x != 0
+					? x < 0
+						? 'orderleft'
+						: 'orderright'
+					: y < 0
+						? 'orderup'
+						: 'orderdown';
+			const targetName = this.cursorChild?.getAttribute(attrName);
+			if (targetName) {
+				//*(not tested yet)
+				let com = this.shadowRoot!.querySelector(
+					`[orderName=${targetName}]`
+				);
+				if (com) {
+					this.setCursor(com as UIChild, true);
+					return true;
+				}
+			}
+		}
 
-    return false;
-  }
+		return false;
+	}
 }
 /**
  * <domui-order-container>
