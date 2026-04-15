@@ -12,10 +12,7 @@
  *
  */
 
-import {
-	html, PropertyValueMap,
-	TemplateResult
-} from 'lit';
+import { html, PropertyValueMap, TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 import ScrollContainer from './ScrollContainer';
 import { clamp } from '../utils';
